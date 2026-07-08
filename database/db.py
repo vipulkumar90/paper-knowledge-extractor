@@ -5,11 +5,13 @@ from pathlib import Path
 
 from utils.logger import get_logger
 
+from utils.config import LOG_FILENAME
+
 logger = get_logger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
-DATABASE_PATH = DATA_DIR / "facts.db"
+DATABASE_PATH = DATA_DIR / LOG_FILENAME
 
 
 def database_exists() -> bool:

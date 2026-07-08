@@ -26,7 +26,11 @@ DATABASE_PROVIDER = (
 # SQLite
 SQLITE_DATABASE_PATH = os.getenv(
     "SQLITE_DATABASE_PATH",
-    "data/facts.db",
+    "data/research.db",
+)
+SQLITE_SCHEMA_FILENAME = os.getenv(
+    "SQLITE_SCHEMA_FILENAME",
+    "sqlite_schema.sql",
 )
 
 # PostgreSQL
