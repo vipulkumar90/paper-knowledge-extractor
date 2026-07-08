@@ -64,24 +64,68 @@ SQLite Database
 ## Project Structure
 
 ```text
-research_pipeline/
+paper-knowledge-extractor/
 
-├── app.py
-├── config.py
-├── logger.py
-├── marker_parser.py
-├── chunking.py
-├── llm.py
-├── extractor.py
-├── merger.py
-├── database.py
-├── schema.py
-├── prompts.py
-├── models.py
-├── papers/
+├── app.py                      # Application entry point
+├── requirements.txt
+├── README.md
+├── .env
+├── .env.example
+│
+├── config/
+│   └── settings.py             # Application configuration
+│
+├── core/
+│   ├── marker_parser.py        # PDF → Markdown conversion
+│   ├── chunking.py             # Markdown chunking
+│   ├── llm.py                  # OpenAI-compatible LLM client
+│   ├── extractor.py            # Extraction + validation pipeline
+│   └── merger.py               # Merge chunk-level results
+│
+├── database/
+│   ├── database.py             # SQLite operations
+│   └── schema.sql              # Database schema
+│
+├── prompts/
+│   ├── extraction.py           # Extraction prompt templates
+│   └── repair.py               # JSON repair prompt templates
+│
+├── schemas/
+│   ├── models.py               # Shared Pydantic models
+│   └── research_schema.py      # Research extraction schema
+│
+├── utils/
+│   ├── logger.py               # Logging configuration
+│   ├── file_utils.py           # File helper functions
+│   └── json_utils.py           # JSON helper functions
+│
+├── papers/                     # Input PDF files
+│
 ├── output/
-└── logs/
+│   ├── markdown/               # Generated Markdown files
+│   ├── chunks/                 # Chunked Markdown (debugging)
+│   ├── extracted/              # Final extracted JSON
+│   └── failed/                 # Failed responses and validation errors
+│
+├── logs/                       # Application logs
+│
+└── tests/                      # Unit and integration tests
 ```
+
+## Directory Overview
+
+| Directory     | Purpose                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| **config/**   | Centralized application configuration and environment settings.                            |
+| **core/**     | The main processing pipeline responsible for parsing, chunking, extraction, and merging.   |
+| **database/** | SQLite database initialization and persistence logic.                                      |
+| **prompts/**  | LLM prompt templates separated from application logic for easy iteration.                  |
+| **schemas/**  | Pydantic models and structured extraction schemas used for validation.                     |
+| **utils/**    | Small reusable helper functions and logging utilities.                                     |
+| **papers/**   | Input directory containing research paper PDFs.                                            |
+| **output/**   | Generated Markdown, intermediate chunks, extracted JSON, and failed outputs for debugging. |
+| **logs/**     | Runtime logs for monitoring and troubleshooting.                                           |
+| **tests/**    | Unit and integration tests for the application.                                            |
 
 ## Design Philosophy
 
