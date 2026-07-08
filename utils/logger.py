@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 
-from config import LOG_LEVEL
+from utils.config import LOG_LEVEL, LOG_FILENAME
 
 
 def get_logger(name: str) -> logging.Logger:
@@ -31,7 +31,7 @@ def get_logger(name: str) -> logging.Logger:
     console_handler.setFormatter(formatter)
 
     file_handler = logging.FileHandler(
-        log_dir / "cow_god_facts.log",
+        log_dir / LOG_FILENAME,
         encoding="utf-8",
     )
     file_handler.setLevel(getattr(logging, LOG_LEVEL, logging.INFO))
